@@ -1,38 +1,97 @@
+*,*::before,*::after
+{
+  box-sizing: border-box;
+  background-color: #252729;
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: Bebas;
+  src: url("./fonts/BebasNeue-Regular.otf");
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+p
+{
+  color: #eb93a9;
+  font-family: Bebas;
+  margin-top: 100px;
+  font-size: 100px;
+  margin-top: 50px;
+  margin-bottom: auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+h1
+{
+   padding-top: 20px;
+   height: 75px;
+   margin-top: 0px;
+   margin-bottom: 25px;
+   font-family: Bebas;
+   background-color: #eb93a9;
+   color: #252729;
+}
+
+.input-container input 
+{
+
+  background-color: white;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: medium;
+  border: 1px solid;
+  border-radius: 8px;
+  height:50px;
+  width:200px;
+  font:  100px;;
+  padding: 20px;
+}
+
+table
+{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table th
+{
+  font-size: larger;
+  height: 30px;
+  width: auto;
   color: white;
+  background-color: rgb(17, 17, 17);
+}
+.input-container button ,.list-item button
+{
+ 
+  border-radius: 8px;
+  font-size: large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-left: 5px;
+  border: 1px solid #eb93a9;
+  height:50px;
+  width:100px;
+  color: #eb93a9;
+  background-color: #36383b;
 }
 
-.App-link {
-  color: #61dafb;
+.list-checkbox
+{
+  height:50px;
+  width:50px;
+}
+.list-input
+{
+  opacity:50;
+  background-color: white;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: medium;
+  border: 1px solid;
+  border-radius: 8px;
+  height:50px;
+  width:200px;
+  font:  100px;;
+  padding: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

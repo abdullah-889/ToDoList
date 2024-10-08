@@ -1,24 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
-
-function App() {
+import { Item } from './Components/item';
+import { taskSlice,RootState, Task ,CreateTask} from './Redux/TasksStore';
+import { useDispatch,useSelector} from 'react-redux';
+function App() 
+{
+  const [inputvalue,setInputValue]   = useState<string>("") ;
+  const dispatch= useDispatch();
+  const taskArr:Task [] = useSelector((state : RootState)=>state.value.tasks);
+  const taskId :number = taskArr.length; 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <h1>To-Do List App</h1>
+      <div className="input-container">
+        <input  onChange={(event : React.ChangeEvent<HTMLInputElement>)=>{setInputValue(event.target.value)}} placeholder='Enter The Task'/> 
+          <button onClick={()=>
+            {
+              dispatch(taskSlice.actions.AddTask(CreateTask(taskId,inputvalue)))//{id : taskId, task : inputvalue}))
+            }}>Add</button>
+      </div>
+      <div>
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Your Pending Tasks
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </div>
+      <table>
+        <thead>
+        <tr>
+  
+        </tr>
+        </thead>
+        <tbody>
+      {taskArr.map((task) => (
+        <Item key={task.id} isCompleted={task.isCompleted} id={task.id} task={task.task} />
+      ))}
+    </tbody>
+        </table>
     </div>
   );
 }
