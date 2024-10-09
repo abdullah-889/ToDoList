@@ -1,11 +1,7 @@
 *,*::before,*::after
 {
   box-sizing: border-box;
-  background-color: #252729;
-}
-
-.App {
-  text-align: center;
+ 
 }
 
 @font-face {
@@ -13,31 +9,64 @@
   src: url("./fonts/BebasNeue-Regular.otf");
 }
 
+
+@font-face {
+  font-family: Rachoe;
+  src: url("./fonts/UtRachoeDemoRegular-JpwOm.otf");
+}
+
+body
+{
+  background-color: #252729;
+}
+.App {
+  text-align: center;
+}
+
 p
 {
   color: #eb93a9;
-  font-family: Bebas;
+  font-family: Rachoe;
   margin-top: 100px;
-  font-size: 100px;
-  margin-top: 50px;
+  font-size: 50px;
+  margin-top: auto;
   margin-bottom: auto;
 }
 
-h1
+.navbar
 {
-   padding-top: 20px;
-   height: 75px;
-   margin-top: 0px;
-   margin-bottom: 25px;
-   font-family: Bebas;
-   background-color: #eb93a9;
+  margin-bottom: 40px;
+  display: flex;
+  background-color: #eb93a9;
+  flex-direction: row;
+  align-items: center;
+  gap: 1300px;
+}
+.navbar a
+{
+  
+  font-size: 50px;
+  font-family: Bebas;
+  margin: 10px;
+  padding: 0%;
+  color: #252729;
+  text-decoration: none;
+  
+}
+
+.navbar p
+{
+
+   margin: 0%;
+   margin-left: 25px;
+   padding: 0%;
+   font-size: 25px;
+   font-family: Rachoe;
    color: #252729;
 }
 
 .input-container input 
 {
-
-  background-color: white;
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: medium;
   border: 1px solid;
@@ -46,6 +75,7 @@ h1
   width:200px;
   font:  100px;;
   padding: 20px;
+  margin-bottom: 10px;
 }
 
 table
