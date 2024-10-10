@@ -6,18 +6,14 @@ import { ToDoList } from './Components/ToDoList';
 import { Login } from './Components/Login';
 function App() 
 {
- 
   return (
     <div className="App">
       <Router>
-       <Navbar/>
         <Routes>
           <Route path='/' element={<Login/>}/>
           <Route path='/List' element={<ToDoList/>}/>
-      
         </Routes>
       </Router>
-
     </div>
   );
 }

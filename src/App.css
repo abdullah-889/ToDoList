@@ -40,20 +40,24 @@ p
   background-color: #eb93a9;
   flex-direction: row;
   align-items: center;
-  gap: 1300px;
+  gap: 1200px;
 }
 .navbar a
 {
-  
+  margin-right: 10px;
   font-size: 50px;
   font-family: Bebas;
-  margin: 10px;
-  padding: 0%;
+  padding: 0px 5px 0px 5px;
   color: #252729;
   text-decoration: none;
   
 }
 
+.navbar a:hover {
+  
+  background-color: white; /* Change background color to white on hover */
+  color: #eb93a9; /* Change text color to black for better contrast */
+}
 .navbar p
 {
 
@@ -104,6 +108,14 @@ table th
   width:100px;
   color: #eb93a9;
   background-color: #36383b;
+}
+
+.input-container button:active ,.list-item button:active
+{
+  transform: translateY(3px);
+  color: #36383b;
+  background-color: #eb93a9;
+  border: 2px solid #36383b;
 }
 
 .list-checkbox
