@@ -1,20 +1,29 @@
 import { configureStore,PayloadAction,createSlice } from "@reduxjs/toolkit";
+import {collection} from "firebase/firestore"
+import { db } from "../config/firebase-config";
 
-
-export const CreateTask = (id:number,task:string) : Task =>(
+export const CreateTask = ( fbId:string,id:number,Task:string ,isCompleted :boolean) : Task =>(
     {
+        fbId,
         id,
-        task,
+        Task,
         isCompleted: false // default value
     })
 
 export interface Task
 {
+   fbId: string,
    id : number,
-   task : string,
+   Task : string,
    isCompleted : boolean  
 }
 
+export interface TaskModel
+{
+   id : number,
+   Task : string,
+   isCompleted : boolean  
+}
 interface UserTasksValue
 {
     tasks : Task []
@@ -27,6 +36,8 @@ interface UserTasks
 
 
 const initialValue : UserTasks= {value:{tasks:[]}}
+
+export const dbTasks = collection(db,"Tasks");
 
 export const taskSlice = createSlice({name:"task",initialState:initialValue,reducers:
     {

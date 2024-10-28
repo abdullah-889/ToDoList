@@ -1,15 +1,14 @@
 import  React, {useState}  from 'react';
-import { taskSlice,Task } from '../Redux/TasksStore';
+import { taskSlice,Task  } from '../Redux/TasksStore';
 import { useDispatch} from 'react-redux';
-
-
+import { deleteDoc,doc, updateDoc} from 'firebase/firestore';
+import { db } from '../config/firebase-config';
 export const Item = (props:Task)=>
     {
         const dispatch= useDispatch();
-        const [displayValue,setDisplayValue] = useState<string>(props.task);
+        const [displayValue,setDisplayValue] = useState<string>(props.Task);
         const [isDisabled,setDisable]= useState<boolean> (true);
         const [isTaskCompleted , setIsTaskCompleted] = useState<boolean> (props.isCompleted);
-
         return (
         <tr className='list-item'>
 
@@ -27,16 +26,27 @@ export const Item = (props:Task)=>
                 if(isDisabled===false)
                 {
                     setIsTaskCompleted(false);
-                    dispatch(taskSlice.actions.EditTask({id:props.id,task:displayValue,isCompleted:isTaskCompleted}))
-                }
 
+                    const taskDocRef = doc(db,"Tasks",props.fbId);
+                 
+                    updateDoc(taskDocRef,{id:props.id,Task:displayValue,isCompleted:isTaskCompleted}).then(()=>
+                        {
+                            dispatch(taskSlice.actions.EditTask({fbId:props.fbId,id:props.id,Task:displayValue,isCompleted:isTaskCompleted}))
+                        })
+
+                    
+                }
             }} style={{ margin: '5px'}}>{isDisabled?"Edit":"Save"}</button>
        </td>
 
        <td>
        <button onClick={()=>
             {
-                dispatch(taskSlice.actions.RemoveTask(props.id))
+                const taskDocRef = doc(db, "Tasks" ,props.fbId);
+                deleteDoc(taskDocRef).then(()=>
+                    {
+                        dispatch(taskSlice.actions.RemoveTask(props.id))
+                    })
             }} style={{ margin: '5px'}}>X</button>
         </td>
       
@@ -46,7 +56,6 @@ export const Item = (props:Task)=>
                 setIsTaskCompleted(true);
             }} type="checkbox"/>
         </td>
-      
-      
+    
         </tr>)
     }

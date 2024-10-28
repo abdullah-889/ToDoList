@@ -2,8 +2,15 @@ import React, { useState } from "react"
 import {auth}from "../config/firebase-config"
 import { signInWithEmailAndPassword ,signInWithPopup} from "firebase/auth"
 import { useNavigate } from "react-router-dom"
-export const Login =()=>
+import { db } from "../config/firebase-config"
+import { collection, getDocs } from "firebase/firestore"
+import { useDispatch } from "react-redux"
+import { taskSlice } from "../Redux/TasksStore"
+
+
+export const Login = ()=>
     {
+
         const [email,setEmail] = useState<string>("")
         const [password,setPassword] =useState<string>("")
         const navigate=useNavigate();
@@ -11,7 +18,7 @@ export const Login =()=>
             {
                 try
                 {
-                    await signInWithEmailAndPassword(auth,email,password).then(()=>
+                    await signInWithEmailAndPassword(auth,email,password).then(async ()=>
                         {
                             navigate("/List")
                         })
