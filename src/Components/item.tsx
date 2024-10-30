@@ -6,9 +6,9 @@ import { db } from '../config/firebase-config';
 export const Item = (props:Task)=>
     {
         const dispatch= useDispatch();
-        const [displayValue,setDisplayValue] = useState<string>(props.Task);
+        const [displayValue,setDisplayValue] = useState<string>(props.model.Task);
         const [isDisabled,setDisable]= useState<boolean> (true);
-        const [isTaskCompleted , setIsTaskCompleted] = useState<boolean> (props.isCompleted);
+        const [isTaskCompleted , setIsTaskCompleted] = useState<boolean> (props.model.isCompleted);
         return (
         <tr className='list-item'>
 
@@ -29,9 +29,9 @@ export const Item = (props:Task)=>
 
                     const taskDocRef = doc(db,"Tasks",props.fbId);
                  
-                    updateDoc(taskDocRef,{id:props.id,Task:displayValue,isCompleted:isTaskCompleted}).then(()=>
+                    updateDoc(taskDocRef,{id:props.model.id,Task:displayValue,isCompleted:isTaskCompleted}).then(()=>
                         {
-                            dispatch(taskSlice.actions.EditTask({fbId:props.fbId,id:props.id,Task:displayValue,isCompleted:isTaskCompleted}))
+                            dispatch(taskSlice.actions.EditTask({fbId:props.fbId,model:{id:props.model.id,Task:displayValue,isCompleted:isTaskCompleted,email:props.model.email}}))
                         })
 
                     
@@ -45,7 +45,7 @@ export const Item = (props:Task)=>
                 const taskDocRef = doc(db, "Tasks" ,props.fbId);
                 deleteDoc(taskDocRef).then(()=>
                     {
-                        dispatch(taskSlice.actions.RemoveTask(props.id))
+                        dispatch(taskSlice.actions.RemoveTask(props.model.id))
                     })
             }} style={{ margin: '5px'}}>X</button>
         </td>

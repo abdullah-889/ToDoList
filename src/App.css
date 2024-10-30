@@ -53,6 +53,18 @@ p
   
 }
 
+.navbar button
+{
+  margin-right: 10px;
+  font-size: 50px;
+  font-family: Bebas;
+  padding: 0px 5px 0px 5px;
+  color: #252729;
+  text-decoration: none;
+  background-color: #eb93a9;
+  border: 0rem;
+}
+
 .navbar a:hover {
   
   background-color: white; /* Change background color to white on hover */

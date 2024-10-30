@@ -2,27 +2,24 @@ import { configureStore,PayloadAction,createSlice } from "@reduxjs/toolkit";
 import {collection} from "firebase/firestore"
 import { db } from "../config/firebase-config";
 
-export const CreateTask = ( fbId:string,id:number,Task:string ,isCompleted :boolean) : Task =>(
+export const CreateTask = ( fbId:string,id:number,Task:string ,email:string|null,isCompleted :boolean) : Task =>(
     {
         fbId,
-        id,
-        Task,
-        isCompleted: false // default value
+        model : {id:id,Task:Task,isCompleted:false,email:email} // default value
     })
 
 export interface Task
 {
    fbId: string,
-   id : number,
-   Task : string,
-   isCompleted : boolean  
+   model:TaskModel
 }
 
 export interface TaskModel
 {
    id : number,
    Task : string,
-   isCompleted : boolean  
+   isCompleted : boolean
+   email:  string | null
 }
 interface UserTasksValue
 {
@@ -41,6 +38,15 @@ export const dbTasks = collection(db,"Tasks");
 
 export const taskSlice = createSlice({name:"task",initialState:initialValue,reducers:
     {
+        ClearLocalData : (state : UserTasks)=>
+            {
+
+                while(state.value.tasks.length>0)
+                {
+                    state.value.tasks.pop()
+                }
+              
+            },
         AddTask:(state:UserTasks,taskName : PayloadAction<Task>)=>
             {
                 state.value.tasks.push(taskName.payload);
@@ -50,14 +56,14 @@ export const taskSlice = createSlice({name:"task",initialState:initialValue,redu
         {
             state.value.tasks= state.value.tasks.filter((task)=>
                 {
-                    return task.id!==taskToDelete.payload;
+                    return task.model.id!==taskToDelete.payload;
                 })
         } ,
         EditTask : (state:UserTasks,taskToEdit:PayloadAction<Task>)=>
             {
-                state.value.tasks[taskToEdit.payload.id-1]= taskToEdit.payload; //{id:taskToEdit.payload.id,task:taskToEdit.payload.task};
+                state.value.tasks[taskToEdit.payload.model.id-1]= taskToEdit.payload; //{id:taskToEdit.payload.id,task:taskToEdit.payload.task};
 
-                console.log(state.value.tasks[taskToEdit.payload.id-1]);
+                console.log(state.value.tasks[taskToEdit.payload.model.id-1]);
             }
     }});
 

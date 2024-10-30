@@ -5,26 +5,29 @@ import { useNavigate } from "react-router-dom"
 import { db } from "../config/firebase-config"
 import { collection, getDocs } from "firebase/firestore"
 import { useDispatch } from "react-redux"
-import { taskSlice } from "../Redux/TasksStore"
 
+import { userSlice } from "../Redux/UserStore"
 
-export const Login = ()=>
+export const Login : React.FC = ()=>
     {
-
+        const dispatch = useDispatch();
         const [email,setEmail] = useState<string>("")
         const [password,setPassword] =useState<string>("")
         const navigate=useNavigate();
+
         const signIn= async ()=>
             {
                 try
                 {
                     await signInWithEmailAndPassword(auth,email,password).then(async ()=>
                         {
+                            dispatch(userSlice.actions.SubscribeUser({email:email}))
                             navigate("/List")
                         })
                 }
                 catch (err)
                 {
+                    dispatch(userSlice.actions.UnsubscribeUser())
                     alert(err);
                 }
              
